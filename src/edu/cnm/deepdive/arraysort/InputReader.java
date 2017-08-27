@@ -16,7 +16,7 @@ import java.util.LinkedList;
  */
 public class InputReader {
   
-  public static Float[][] list;
+  public Float[][] list;
 
     public InputReader(String fileToRead) {
       File inputRead = new File(fileToRead);
