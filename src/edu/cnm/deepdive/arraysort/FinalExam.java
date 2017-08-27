@@ -23,7 +23,8 @@ import java.util.List;
  */
 public class FinalExam {
   
-
+  private static final String OUTPUT_FILE = "resources/test-output.dat";
+  
   private static final String FINAL_BUNDLE = "resources/test-input.dat";
   private static Comparator compare = new CompareArray();
   
@@ -38,32 +39,44 @@ public class FinalExam {
     
     for (Float[] mix : temp) {
      // Collections.shuffle(Arrays.asList(mix));
-      Collections.sort(Arrays.asList(mix));
+      Collections.shuffle(Arrays.asList(mix));
     }
     Arrays.asList(temp).sort(compare);
-    System.out.println(Arrays.toString(temp[0]));
-    System.out.println(Arrays.toString(temp[1]));
-    System.out.println(Arrays.toString(temp[433]));
-    System.out.println(Arrays.toString(temp[455]));
+    writeToOutput(OUTPUT_FILE, temp);
   }
   
-  private static void writeNeedlesFound(
-      String filename, List<Integer> found) {
+  private static void writeToOutput(String fileName, Float[][] mixed) {
+    
+    float counter = 0.0f;
+    float sum = 0.0f;
+    
     try (
-      FileOutputStream stream = new FileOutputStream(filename);
+      FileOutputStream stream = new FileOutputStream(fileName);
       OutputStreamWriter writer = new OutputStreamWriter(stream);
       PrintWriter printer = new PrintWriter(writer);
     ) {
-      for (int needle : found) {
-        printer.println(needle);
+      for (Float[] writeLine : mixed) {
+        int i = 1;
+        for (Float num : writeLine) {
+          counter++;
+          sum += num;
+          if (i++ == writeLine.length) {
+            printer.printf("%.3f", num);
+          } else {            
+            printer.printf("%.3f|", num);  
+          }
+        }
+        printer.println();
       }
+      float average = (sum / counter);
+      printer.print(average);
+      
     } catch (IOException ex) {
       ex.printStackTrace();
       throw new RuntimeException(ex);
     }
   }
-
-  
+    
    
 
 }

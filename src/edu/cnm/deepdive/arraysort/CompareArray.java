@@ -13,8 +13,6 @@ import java.util.Comparator;
  */
 public class CompareArray implements Comparator {
 
-
-
   @Override
   public int compare(Object arrayOne, Object arrayTwo) {
     
