@@ -18,6 +18,11 @@ public class InputReader {
   
   public Float[][] list;
 
+  /**
+   * This method uses the given file and reads the given file
+   * by using the file and buffered reader. 
+   * @param fileToRead
+   */
     public InputReader(String fileToRead) {
       File inputRead = new File(fileToRead);
       try (
